@@ -1,6 +1,6 @@
 # Project Encryption
 
-Welcome to the encryption_project GitHub repository! This repository contains Python code for various encryption methods. Currently, the Caesar cipher is fully implemented, the Enigma cipher and decipher is in progress, while the Public Key, and Vigenère ciphers are placeholders that will be completed in the future.
+Welcome to the encryption_project GitHub repository! This repository contains Python code for various encryption methods. Currently, the Caesar cipher is fully implemented, the Enigma cipher and decipher are in progress, while the Public Key and Vigenère ciphers are placeholders that will be completed in the future.
 
 ## Contents
 
@@ -31,7 +31,7 @@ Welcome to the encryption_project GitHub repository! This repository contains Py
 
 ## Usage
 
-The Caesar cipher is already implemented and can be used directly. The Enigma Cipher is practicly all ready added and should work, so you can use it directly. The other encryption methods are currently placeholders.
+The Caesar cipher is already implemented and can be used directly. The Enigma Cipher is practically all ready added and should work, so you can use it directly. The other encryption methods are currently placeholders.
 
 ### Example: Caesar Cipher
 
@@ -97,7 +97,7 @@ The following methods are still in progress and currently serve as placeholders 
 
 ### "In-Progress" Methodes
 
-The following methods have been added partly and will be completly ready soon:
+The following methods have been added partly and will be completely ready soon:
 
 - `enigma_cipher()`
 - `enigma_decipher()`
