@@ -1,13 +1,14 @@
 # Project Encryption
 
-Welcome to the encryption_project GitHub repository! This repository contains Python code for various encryption methods. Currently, the Caesar cipher is fully implemented, while the Enigma, Public Key, and Vigenère ciphers are placeholders that will be completed in the future.
+Welcome to the encryption_project GitHub repository! This repository contains Python code for various encryption methods. Currently, the Caesar cipher is fully implemented, the Enigma cipher and decipher is in progress, while the Public Key, and Vigenère ciphers are placeholders that will be completed in the future.
 
 ## Contents
 
 - **Caesar Cipher**: Fully implemented Caesar cipher encryption algorithm.
-- **Enigma Cipher**: Placeholder for the Enigma cipher.
+- **Enigma Cipher**: Parts of the Enigma Cipher were already added.
 - **Public Key Cipher**: Placeholder for the Public Key encryption.
 - **Vigenère Cipher**: Placeholder for the Vigenère cipher.
+- **Decipher**: Mostly placeholders for the decipher methodes of the cipher methodes.
 
 ## Installation
 
@@ -30,7 +31,7 @@ Welcome to the encryption_project GitHub repository! This repository contains Py
 
 ## Usage
 
-The Caesar cipher is already implemented and can be used directly. The other encryption methods are currently placeholders.
+The Caesar cipher is already implemented and can be used directly. The Enigma Cipher is practicly all ready added and should work, so you can use it directly. The other encryption methods are currently placeholders.
 
 ### Example: Caesar Cipher
 
@@ -84,13 +85,106 @@ def caesar_cipher(plaintext, key):
 print(caesar_cipher("This is a test", 2))
 ```
 
-## Placeholder Methods
+### Placeholder Methods
 
 The following methods are still in progress and currently serve as placeholders in the code:
 
-- `enigma_cipher()`
 - `public_key_cipher()`
 - `vigenere_cipher()`
+- `caesar_decipher()`
+- `public_key_decipher()`
+- `vigenere_decipher()`
+
+### "In-Progress" Methodes
+
+The following methods have been added partly and will be completly ready soon:
+
+- `enigma_cipher()`
+- `enigma_decipher()`
+
+### Example: Enigma Cipher
+
+The Enigma cipher is a complex encryption machine used by the Germans during World War II.
+
+#### Example Code
+
+```python
+def enigma_cipher(plaintext):
+    plaintext_lower = plaintext.lower()
+    plaintext_letters = list(plaintext_lower)
+    letter_numbers = []
+
+    addition = [['a', 5], ['b', -2], ['c', 4], ['d', 1], ['e', 7], ['f', -7], ['g', -3], 
+            ['h', 2], ['i', -1], ['j', 4], ['k', -2], ['l', -1], ['m', 2], ['n', -1], 
+            ['o', 3], ['p', 1], ['q', 2], ['r', 6], ['s', -3], ['t', 3], ['u', 1], 
+            ['v', 7], ['w', -3], ['x', 3], ['y', 3], ['z', -5]]
+
+    for x in plaintext_letters:
+        for item in addition:
+            if x == item[0]:
+                y = (ord(x) - ord('a') + 1 + item[1]) % 26
+                if y == 0:
+                    y = 26
+                letter_numbers.append(y)
+
+    ciphertext_letters = []
+
+    for a in letter_numbers:
+        if a <= 26:
+            b = a
+            ciphertext_letters.append(chr(b + ord('a') - 1))
+    
+    ciphertext = "".join(ciphertext_letters)
+    
+    return ciphertext
+
+print(enigma_cipher("ABCDEFGHIJKLMNOPQRSTUVWXYZ"))
+```
+
+### Decipher Methods
+
+Decipher methods have been added to the project for decryption purposes.
+
+#### Example Code
+
+```python
+def enigma_decipher(ciphertext):
+    ciphertext_lower = ciphertext.lower()
+    ciphertext_letters = list(ciphertext_lower)
+    letter_numbers = []
+
+    addition = [[5, 'f'], [-2, 'z'], [4, 'g'], [1, 'e'], [7, 'l'], [-7, 'y'], [-3, 'd'],
+                [2, 'j'], [-1, 'h'], [4, 'n'], [-2, 'i'], [-1, 'k'], [2, 'o'], [-1, 'm'],
+                [3, 'r'], [1, 'q'], [2, 's'], [6, 'x'], [-3, 'p'], [3, 'w'], [1, 'v'],
+                [7, 'c'], [-3, 't'], [3, 'a'], [3, 'b'], [-5, 'u']]
+
+    # Create a dictionary to map each letter to its corresponding number
+    letter_to_number = {item[1]: item[0] for item in addition}
+
+    for letter in ciphertext_letters:
+        if letter.isalpha():
+            # Find the original number using the ciphertext letter
+            original_number = letter_to_number[letter]
+            # Calculate the shift value based on the original and the encrypted letter
+            shift_value = original_number
+            decrypted_number = (ord(letter) - ord('a') + 1 - shift_value) % 26
+            if decrypted_number == 0:
+                decrypted_number = 26
+            letter_numbers.append(decrypted_number)
+
+    decrypted_letters = []
+
+    for number in letter_numbers:
+        if number <= 26:
+            decrypted_ascii = number + ord('a') - 1
+            decrypted_letters.append(chr(decrypted_ascii))
+    
+    plaintext = "".join(decrypted_letters)
+    
+    return plaintext
+
+print(enigma_decipher("efphpwlhmwlpw"))
+```
 
 ## Contributing
 
@@ -101,13 +195,13 @@ Contributions to this repository are welcome! Please follow these steps to contr
 3. Make your changes and commit them (`git commit -m 'Add new encryption method'`).
 4. Push the branch (`git push origin feature/new-encryption-method`).
 5. Create a pull request.
-
+   
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the <a href="/Mika-Rsbg/project_encryption/blob/main/LICENSE">LICENSE</a> file for details.
 
 ## Contact
 
 If you have any questions or suggestions, please open an issue in the GitHub repository or contact me directly.
 
-Happy encrypting!
+#### Happy encrypting!
