@@ -36,12 +36,9 @@ def enigma_decipher(ciphertext):
     
     return plaintext
 
-
-ciphertext = "efphpwlhmwlpw"
-plaintext = enigma_decipher(ciphertext)
-print("Der entschlüsselte Text ist:", plaintext)
-
 def public_key_decipher():
     pass
 def vigenere_decipher():
     pass
+
+print(enigma_decipher("efphpwlhmwlpw"))
