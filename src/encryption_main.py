@@ -24,7 +24,6 @@ def caesar_cipher(plaintext, key):
             if a <= 26:
                 b = (a - 1 + key) % 26 + 1
                 ciphertext_letters.append(chr(b + ord('a') - 1))
-                key += 1
             elif a <= 36:
                 c = a - 27
                 ciphertext_letters.append(str(c))
@@ -57,17 +56,12 @@ def enigma_cipher(plaintext):
                     y = 26
                 letter_numbers.append(y)
 
-    print(plaintext_letters)
-    print(letter_numbers)
-
     ciphertext_letters = []
 
     for a in letter_numbers:
         if a <= 26:
             b = a
             ciphertext_letters.append(chr(b + ord('a') - 1))
-    
-    print(ciphertext_letters)
 
     ciphertext = ""
     for element in ciphertext_letters:
@@ -80,6 +74,6 @@ def public_key_cipher():
 def vigenere_cipher():
     pass
 
-print(caesar_cipher("Das ist ein Test", 2))
+print(caesar_cipher("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 2))
 print(caesar_cipher('Ich bin Mika Rosenberger und ich bin am  25.05.2010 geboren. Das ist ein beispiel Text! "Hallo", sagte Lisa.', 73))
 print(enigma_cipher("ABCDEFGHIJKLMNOPQRSTUVWXYZ"))
