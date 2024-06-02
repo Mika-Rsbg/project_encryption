@@ -31,8 +31,7 @@ def caesar_decipher(cipertext, key):
             plaintext_letters.append(number)
 
     plaintext = "".join(plaintext_letters)
-    return plaintext
-        
+    return plaintext 
 
 def enigma_decipher(ciphertext):
     ciphertext_lower = ciphertext.lower()
