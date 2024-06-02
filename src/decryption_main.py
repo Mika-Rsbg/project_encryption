@@ -4,7 +4,9 @@ def caesar_decipher(cipertext, key):
     letter_numbers = []
     control_chars = ['.', ',', '!', '?', '"', ':', ';', '(', ')']
 
+    # Iterate over each letter in the ciphertext
     for letter in ciphertext_letters:
+        # Add numbers corresponding to the ciphertext letters
         if letter.isalpha():
             letter_numbers.append(ord(letter) - ord('a') + 1)
         if letter.isdigit():
@@ -15,9 +17,12 @@ def caesar_decipher(cipertext, key):
         if letter in control_chars:
             letter_numbers.append(letter)
     
+    # List to store the letters of the plaintext
     plaintext_letters = []
 
+    # Iterate over each number in the list of letter numbers
     for number in letter_numbers:
+        # Decode the letters and add them to the plaintext
         if isinstance(number, int):
             if number <= 26:
                 number -= key
@@ -29,7 +34,7 @@ def caesar_decipher(cipertext, key):
                 plaintext_letters.append(" ")
         else:
             plaintext_letters.append(number)
-
+            
     plaintext = "".join(plaintext_letters)
     return plaintext 
 
