@@ -1,5 +1,38 @@
-def caesar_decipher():
-    pass
+def caesar_decipher(cipertext, key):
+    ciphertext_lower = cipertext.lower()
+    ciphertext_letters = list(ciphertext_lower)
+    letter_numbers = []
+    control_chars = ['.', ',', '!', '?', '"', ':', ';', '(', ')']
+
+    for letter in ciphertext_letters:
+        if letter.isalpha():
+            letter_numbers.append(ord(letter) - ord('a') + 1)
+        if letter.isdigit():
+            x = int(letter) + 27
+            letter_numbers.append(x)
+        if letter == " ":
+            letter_numbers.append(100)
+        if letter in control_chars:
+            letter_numbers.append(letter)
+    
+    plaintext_letters = []
+
+    for number in letter_numbers:
+        if isinstance(number, int):
+            if number <= 26:
+                number -= key
+                number = (number - 1) % 26 + 1  # Wrap around if needed
+                plaintext_letters.append(chr(number + ord('a') - 1))
+            elif number <= 36:
+                plaintext_letters.append(str(number - 27))
+            elif number == 100:
+                plaintext_letters.append(" ")
+        else:
+            plaintext_letters.append(number)
+
+    plaintext = "".join(plaintext_letters)
+    return plaintext
+        
 
 def enigma_decipher(ciphertext):
     ciphertext_lower = ciphertext.lower()
@@ -42,3 +75,4 @@ def vigenere_decipher():
     pass
 
 print(enigma_decipher("efphpwlhmwlpw"))
+print(caesar_decipher('dxc wdi hdfv mjnziwzmbzm piy dxc wdi vh  25.05.2010 bzwjmzi. yvn dno zdi wzdnkdzg ozso! "cvggj", nvboz gdnv.', 73))
