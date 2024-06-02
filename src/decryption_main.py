@@ -21,7 +21,7 @@ def caesar_decipher(cipertext, key):
         if isinstance(number, int):
             if number <= 26:
                 number -= key
-                number = (number - 1) % 26 + 1  # Wrap around if needed
+                number = (number - 1) % 26 + 1
                 plaintext_letters.append(chr(number + ord('a') - 1))
             elif number <= 36:
                 plaintext_letters.append(str(number - 27))
