@@ -91,9 +91,13 @@ The following methods are still in progress and currently serve as placeholders 
 
 - `public_key_cipher()`
 - `vigenere_cipher()`
-- `caesar_decipher()`
 - `public_key_decipher()`
 - `vigenere_decipher()`
+
+### "Release" Methodes
+This methodes are practically finished and will undergo final checks before the release, you can find them in different branches:
+
+- `caesar_decipher()`
 
 ### "In-Progress" Methodes
 
@@ -127,6 +131,9 @@ def enigma_cipher(plaintext):
                     y = 26
                 letter_numbers.append(y)
 
+    print(plaintext_letters)
+    print(letter_numbers)
+
     ciphertext_letters = []
 
     for a in letter_numbers:
@@ -134,7 +141,11 @@ def enigma_cipher(plaintext):
             b = a
             ciphertext_letters.append(chr(b + ord('a') - 1))
     
-    ciphertext = "".join(ciphertext_letters)
+    print(ciphertext_letters)
+
+    ciphertext = ""
+    for element in ciphertext_letters:
+        ciphertext += element
     
     return ciphertext
 
