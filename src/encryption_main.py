@@ -71,9 +71,49 @@ def enigma_cipher(plaintext):
         
 def public_key_cipher():
     pass
-def vigenere_cipher():
-    pass
+
+def vigenere_cipher(plaintext, key_word):
+    plaintext_lower = plaintext.lower()
+    plaintext_letters = list(plaintext_lower)
+    key_word_lower = key_word.lower()
+    key_word_letters = list(key_word_lower)
+    letter_numbers = []
+
+    key_length = len(key_word_letters)
+    key_indices = [ord(letter) - ord('a') for letter in key_word_letters]
+
+    for i, letter in enumerate(plaintext_letters):
+        if letter.isalpha():
+            x = ord(letter) - ord('a')
+            y = key_indices[i % key_length]  # Use the index to repeat the key
+            z = (x + y) % 26
+            if z == 0:
+                z = 26
+            letter_numbers.append(z)
+        else:
+            letter_numbers.append(letter)
+
+    ciphertext_letters = []
+
+    for number in letter_numbers:
+        if isinstance(number, int):
+            if number < 0:
+                print("warning: error")
+            cipher_letter = chr(number + ord('a'))
+            ciphertext_letters.append(cipher_letter)
+            if number <= 0:
+                print("warning: error")
+                print(cipher_letter)
+        else:
+            ciphertext_letters.append(number)
+            print(number)
+
+    print(plaintext_letters)
+    print(letter_numbers)
+    print(ciphertext_letters)
+
 
 print(caesar_cipher("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 2))
 print(caesar_cipher('Ich bin Mika Rosenberger und ich bin am  25.05.2010 geboren. Das ist ein beispiel Text! "Hallo", sagte Lisa.', 73))
 print(enigma_cipher("ABCDEFGHIJKLMNOPQRSTUVWXYZ"))
+vigenere_cipher("abcdefghijklmnopqrstuvwxyz", "w")
