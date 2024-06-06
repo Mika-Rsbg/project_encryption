@@ -1,5 +1,42 @@
-def caesar_decipher():
-    pass
+def caesar_decipher(cipertext, key):
+    ciphertext_lower = cipertext.lower()
+    ciphertext_letters = list(ciphertext_lower)
+    letter_numbers = []
+    control_chars = ['.', ',', '!', '?', '"', ':', ';', '(', ')']
+
+    # Iterate over each letter in the ciphertext
+    for letter in ciphertext_letters:
+        # Add numbers corresponding to the ciphertext letters
+        if letter.isalpha():
+            letter_numbers.append(ord(letter) - ord('a') + 1)
+        if letter.isdigit():
+            x = int(letter) + 27
+            letter_numbers.append(x)
+        if letter == " ":
+            letter_numbers.append(100)
+        if letter in control_chars:
+            letter_numbers.append(letter)
+    
+    # List to store the letters of the plaintext
+    plaintext_letters = []
+
+    # Iterate over each number in the list of letter numbers
+    for number in letter_numbers:
+        # Decode the letters and add them to the plaintext
+        if isinstance(number, int):
+            if number <= 26:
+                number -= key
+                number = (number - 1) % 26 + 1
+                plaintext_letters.append(chr(number + ord('a') - 1))
+            elif number <= 36:
+                plaintext_letters.append(str(number - 27))
+            elif number == 100:
+                plaintext_letters.append(" ")
+        else:
+            plaintext_letters.append(number)
+            
+    plaintext = "".join(plaintext_letters)
+    return plaintext 
 
 def enigma_decipher(ciphertext):
     ciphertext_lower = ciphertext.lower()
@@ -42,3 +79,4 @@ def vigenere_decipher():
     pass
 
 print(enigma_decipher("efphpwlhmwlpw"))
+print(caesar_decipher('dxc wdi hdfv mjnziwzmbzm piy dxc wdi vh  25.05.2010 bzwjmzi. yvn dno zdi wzdnkdzg ozso! "cvggj", nvboz gdnv.', 73))
