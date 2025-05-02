@@ -71,9 +71,56 @@ def enigma_cipher(plaintext):
         
 def public_key_cipher():
     pass
-def vigenere_cipher():
-    pass
 
+def vigenere_cipher(plaintext, key_word, table_word):
+    plaintext_lower = plaintext.lower()
+    plaintext_letters = list(plaintext_lower)
+    key_word_lower = key_word.lower()
+    key_word_letters = list(key_word_lower)
+    letter_numbers = []
+
+    key_length = len(key_word_letters)
+    key_indices = [ord(letter) - ord('a') for letter in key_word_letters]
+
+    # Create custom alphabet based on table_word
+    custom_alphabet = []
+    seen = set()
+
+    # Add letters from table_word to custom_alphabet
+    for char in table_word:
+        if char not in seen and char.isalpha():
+            seen.add(char)
+            custom_alphabet.append(char)
+
+    # Add remaining letters from the standard alphabet
+    for char in 'abcdefghijklmnopqrstuvwxyz':
+        if char not in seen:
+            custom_alphabet.append(char)
+
+    # print(f"Custom alphabet: {''.join(custom_alphabet)}")
+
+    # Create a mapping from the standard alphabet to the custom alphabet
+    standard_to_custom = {chr(i + ord('a')): custom_alphabet[i] for i in range(26)}
+    custom_to_standard = {v: k for k, v in standard_to_custom.items()}
+
+    for i, letter in enumerate(plaintext_letters):
+        if letter.isalpha():
+            x = ord(custom_to_standard[letter]) - ord('a')
+            y = key_indices[i % key_length]  # Use the index to repeat the key
+            z = (x + y) % 26
+            encrypted_letter = standard_to_custom[chr(z + ord('a'))]
+            # print(f"Letter: {letter} x: {x} y: {y} z: {z} Encrypted letter: {encrypted_letter}")
+            letter_numbers.append(encrypted_letter)
+        else:
+            letter_numbers.append(letter)
+
+    ciphertext_letters = letter_numbers
+    # print("Plaintext letters:", plaintext_letters)
+    # print("Ciphertext letters:", ciphertext_letters)
+    return ''.join(ciphertext_letters)
+
+# Beispielaufruf:
 print(caesar_cipher("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 2))
-print(caesar_cipher('Ich bin Mika Rosenberger und ich bin am  25.05.2010 geboren. Das ist ein beispiel Text! "Hallo", sagte Lisa.', 73))
+# print(caesar_cipher('Ich bin Mika Rosenberger und ich bin am  25.05.2010 geboren. Das ist ein beispiel Text! "Hallo", sagte Lisa.', 73))
 print(enigma_cipher("ABCDEFGHIJKLMNOPQRSTUVWXYZ"))
+print(vigenere_cipher("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "a", "a"))
